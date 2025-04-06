@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-task-form',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './task-form.component.html',
   styleUrl: './task-form.component.css'
 })

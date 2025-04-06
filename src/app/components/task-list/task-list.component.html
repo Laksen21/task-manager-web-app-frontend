@@ -1,1 +1,38 @@
-<p>task-list works!</p>
+<div class="m-4">
+	<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+		<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+		<label class="btn btn-outline-dark" for="btnradio1">All</label>
+
+		<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+		<label class="btn btn-outline-dark" for="btnradio2">To Do</label>
+
+		<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+		<label class="btn btn-outline-dark" for="btnradio3">In Progress</label>
+
+		<input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
+		<label class="btn btn-outline-dark" for="btnradio4">Done</label>
+	</div>
+	<div class="d-flex justify-content-start">
+		<a routerLink="/task-form" class="btn btn-dark mt-3">Create New Task</a>
+	</div>
+	<div class="d-flex justify-content-start mt-3">
+		<div class="card" style="width: 18rem;">
+			<div class="card-body">
+				<h5 class="card-title">Task Title</h5><span>ID: 1</span>
+				<p>status: <span class="badge bg-secondary">To Do</span></p>
+				<p class="card-text">Task Description</p>
+				<a href="#" class="btn btn-flat btn-primary-flat me-3">Edit</a>
+				<a href="#" class="btn btn btn-flat btn-danger-flat">Delete</a>
+			</div>
+		</div>
+		<div class="card" style="width: 18rem; margin-left: 10px;">
+			<div class="card-body">
+				<h5 class="card-title">Task Title</h5><span>ID: 2</span>
+				<p>status: <span class="badge bg-secondary">In Progress</span></p>
+				<p class="card-text">Task Description</p>
+				<a href="#" class="btn btn-flat btn-primary-flat me-3">Edit</a>
+				<a href="#" class="btn btn btn-flat btn-danger-flat">Delete</a>
+			</div>
+		</div>
+	</div>
+</div>
