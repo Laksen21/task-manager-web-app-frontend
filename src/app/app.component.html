@@ -1,4 +1,4 @@
 <div data-bs-theme="dark">
-  <app-nav-bar *ngIf="showNavbar"></app-nav-bar>
+  <app-nav-bar *ngIf="authService.isLoggedIn()"></app-nav-bar>
   <router-outlet />
 </div>

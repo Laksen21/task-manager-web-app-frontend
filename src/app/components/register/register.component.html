@@ -5,21 +5,33 @@
           <div class="card-body p-4">
             <h2 class="text-center mb-4">Register</h2>
             
-            <form>
+            <form [formGroup]="registerForm" (ngSubmit)="register()">
               <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" placeholder="Choose a username" required>
+                <input formControlName="username" type="text" class="form-control" id="username" placeholder="Choose a username" >
+                <div *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid" class="text-danger">
+                  <div *ngIf="registerForm.get('username')?.hasError('required')">Username is required.</div>
+                </div>
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Create a password" required>
+                <input formControlName="password" type="password" class="form-control" id="password" placeholder="Create a password">
+                <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid" class="text-danger">
+                  <div *ngIf="registerForm.get('password')?.hasError('required')">Password is required.</div>
+                </div>
               </div>
               <div class="mb-4">
                 <label for="confirmPassword" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
+                <input formControlName="confirmPassword" type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
+                <div *ngIf="registerForm.hasError('passwordMismatch') && registerForm.get('confirmPassword')?.touched" class="text-danger">
+                  Passwords do not match!
+                </div>
               </div>
               <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-primary">Create Account</button>
+                <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Create Account</button>
+                <div class="alert alert-danger alert-dismissible fade show" *ngIf="alertService.message" [ngClass]="alertService.alertClass" role="alert">
+                  {{ alertService.message }}
+                </div>
               </div>
             </form>
             <div class="position-relative my-4">

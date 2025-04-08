@@ -1,32 +1,47 @@
 <div class="container mt-4">
-    <div class="card shadow-lg">
-      <div class="card-body">
-        <h3 class="mb-4">Create Task</h3>
-        <form>
-          <div class="mb-3 shadow-sm">
-            <input type="text" class="form-control" id="taskTitle" placeholder="Title*" required>
+  <div class="card shadow-lg">
+    <div class="card-body">
+      <h3 class="mb-4">{{ isEditMode ? 'Edit Task' : 'Create Task' }}</h3>
+      <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+        <div class="alert alert-dismissible fade show mt-3" *ngIf="alertService.message" [ngClass]="alertService.alertClass" role="alert" data-bs-theme="dark">
+          {{ alertService.message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class="mb-3 shadow-sm">
+          <input formControlName="title" type="text" class="form-control" id="taskTitle" placeholder="Title*">
+          <div *ngIf="taskForm.get('title')?.touched && taskForm.get('title')?.invalid" class="text-danger">
+            <div *ngIf="taskForm.get('title')?.hasError('required')">Title is required.</div>
+            <div *ngIf="taskForm.get('title')?.hasError('maxlength')">Title cannot be more than 25 characters.</div>
           </div>
-          
-          <div class="mb-3 shadow-sm">
-            <textarea class="form-control" id="taskDescription" rows="6" placeholder="Description"></textarea>
+        </div>
+
+        <div class="mb-3 shadow-sm">
+          <textarea formControlName="description" class="form-control" id="taskDescription" rows="6" placeholder="Description"></textarea>
+          <div *ngIf="taskForm.get('description')?.touched && taskForm.get('description')?.invalid" class="text-danger">
+            <div *ngIf="taskForm.get('description')?.hasError('required')">Description is required.</div>
+            <div *ngIf="taskForm.get('description')?.hasError('maxlength')">Description cannot be more than 100 characters.</div>
           </div>
-          
-          <div class="mb-4 shadow-sm">
-            <div class="input-group">
-              <span class="input-group-text border-end-0">Status*</span>
-              <select class="form-select" id="taskStatus" required>
-                <option selected>To Do</option>
-                <option>In Progress</option>
-                <option>Done</option>
-              </select>
-            </div>
+        </div>
+
+        <div class="mb-4 shadow-sm">
+          <div class="input-group">
+            <span class="input-group-text border-end-0">Status*</span>
+            <select formControlName="status" class="form-select" id="taskStatus">
+              <option selected>To Do</option>
+              <option>In Progress</option>
+              <option>Done</option>
+            </select>
           </div>
-          
-          <div class="d-flex justify-content-end">
-            <button routerLink="/tasks" type="button" class="btn btn-light me-2 shadow-sm">Cancel</button>
-            <button type="submit" class="btn btn-success shadow-sm">Create</button>
+          <div *ngIf="taskForm.get('status')?.touched && taskForm.get('status')?.invalid" class="text-danger">
+            <div *ngIf="taskForm.get('status')?.hasError('required')">Status is required.</div>
           </div>
-        </form>
-      </div>
+        </div>
+
+        <div class="d-flex justify-content-end">
+          <button routerLink="/tasks" type="button" class="btn btn-light me-2 shadow-sm">Cancel</button>
+          <button type="submit" class="btn btn-success shadow-sm" [disabled]="taskForm.invalid">{{ isEditMode ? 'Edit Task' : 'Create Task' }}</button>
+        </div>
+      </form>
     </div>
   </div>
+</div>
